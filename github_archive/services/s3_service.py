@@ -16,7 +16,6 @@ class S3:
             Body=content.encode("utf-8"),
             Key=GithubArchiveConf.HOME_PATH + key,
         )
-        
 
 
 if __name__ == "__main__":
