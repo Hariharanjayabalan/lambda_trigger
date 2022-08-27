@@ -5,7 +5,6 @@ from github_archive.conf.github_archive_conf import GithubArchiveConf
 
 class S3:
     def __init__(self):
-        os.environ.setdefault('AWS_PROFILE','lambda_profile')
         self.s3_client=boto3.client('s3', verify=False)
     
     def s3_list_buckets(self):
