@@ -1,6 +1,7 @@
+import sys
 import boto3
-import subprocess
 import os
+from github_archive.conf.github_archive_conf import GithubArchiveConf  
 
 class S3:
     def __init__(self):
@@ -9,13 +10,11 @@ class S3:
     
     def s3_list_buckets(self):
         bucket=self.s3_client.list_buckets()
-        print(os.environ.get('bucket'))
+        print(bucket)
 
-    def s3_write_content(self,bucket_name,content):
-        pass
+    def s3_write_content(self,content,key):
+        self.s3_client.put_object(Bucket=GithubArchiveConf.BUCKET_NAME,Body=content.encode('utf-8'),Key=GithubArchiveConf.HOME_PATH+key)
 
-
-    
-
-a=S3()
-a.s3_list_buckets()
+if __name__== '__main__': 
+    a=S3()
+    a.s3_write_content('hari','test.txt')
