@@ -1,6 +1,4 @@
-import sys
 import boto3
-import os
 from github_archive.conf.github_archive_conf import GithubArchiveConf  
 
 class S3:
@@ -15,5 +13,5 @@ class S3:
         self.s3_client.put_object(Bucket=GithubArchiveConf.BUCKET_NAME,Body=content.encode('utf-8'),Key=GithubArchiveConf.HOME_PATH+key)
 
 if __name__== '__main__': 
-    a=S3()
-    a.s3_write_content('hari','test.txt')
+    s3_object=S3()
+    s3_object.s3_write_content('hari','test.txt')
