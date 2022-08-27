@@ -1,3 +1,4 @@
+#!/bin/bash
 declare -a folder_name=('github_archive')
 rm -rf lambda_zip
 rm -rf comman_zip
@@ -11,3 +12,4 @@ zip -rq lambda_zip/upload.zip $pkg
 cd comman_zip
 zip -rq ../lambda_zip/upload.zip .
 done
+rm -rf ../comman_zip
