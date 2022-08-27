@@ -1,4 +1,5 @@
 #!/bin/bash
+echo 'Hari testing'
 declare -a folder_name=('github_archive')
 rm -rf lambda_zip
 rm -rf comman_zip
