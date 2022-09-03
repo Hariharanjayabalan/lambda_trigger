@@ -39,8 +39,7 @@ class Dynamodb:
         # Since we are filtering based on
         #  key and hash columns we will get single record.
 
-        response = self.db_client.get_item(TableName=table_name, 
-        Key=filter_condition)
+        response = self.db_client.get_item(TableName=table_name, Key=filter_condition)
         result = response["Item"]
         return result
 
@@ -86,8 +85,7 @@ class Dynamodb:
         return response
 
     def write_to_table(self, table_name, write_value):
-        response = self.db_client.put_item(TableName=table_name,
-         Item=write_value)
+        response = self.db_client.put_item(TableName=table_name, Item=write_value)
         return response
 
 
@@ -138,7 +136,7 @@ if __name__ == "__main__":
     )
     """
 
-    # Reading data based on get item, Get item will 
+    # Reading data based on get item, Get item will
     # read based on key columns only.
     # Related to alias column name, if any of your table name
     #  contains keywords(ie connections) then # should be
@@ -149,7 +147,7 @@ if __name__ == "__main__":
         )
     )
 
-    # Reading data based on scan function, Attr function should be used 
+    # Reading data based on scan function, Attr function should be used
     # for non primary columns.
     #  For Key columns, we should use Key Function.
     print(
