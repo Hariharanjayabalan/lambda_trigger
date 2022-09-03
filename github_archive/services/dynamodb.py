@@ -34,8 +34,10 @@ class Dynamodb:
         return response
 
     def retrive_table_data_using_get(self, table_name, filter_condition):
-        # Used to filter only based on key and hash columns(both hash column and key column)
-        # Since we are filtering based on key and hash columns we will get single record.
+        # Used to filter only based on key
+        # and hash columns(both hash column and key column)
+        # Since we are filtering based on
+        #  key and hash columns we will get single record.
 
         response = self.db_client.get_item(TableName=table_name, Key=filter_condition)
         result = response["Item"]
@@ -44,10 +46,12 @@ class Dynamodb:
     def retrive_table_data_using_scan(
         self, table_name, filter_condition, select_columnns, alias_columns
     ):
-        # If we have to use filter condition in scan, Only boto3 resources should be used
+        # If we have to use filter condition in scan,
+        #  Only boto3 resources should be used
         # Scan will produce 1mb of data for each API call.
         # Select default is ALL_ATTRIBUTES
-        # If we use ProjectionExpression then we should use select as SPECIFIC_ATTRIBUTES
+        # If we use ProjectionExpression
+        # then we should use select as SPECIFIC_ATTRIBUTES
 
         table = self.db_resource.Table(table_name)
         response = table.scan(
@@ -71,7 +75,8 @@ class Dynamodb:
 
     def delete_table_entry(self, table_name, delete_condition):
         # Deleting will happen only based on HASH and KEY
-        # If you are not aware of the key columns valu, then use scan function and select the key columns
+        # If you are not aware of the key columns valu,
+        # then use scan function and select the key columns
         # Pass the above selected key columns based for loop
         #
         response = self.db_client.delete_item(
@@ -93,7 +98,8 @@ if __name__ == "__main__":
     # Wait time to drop the table
     time.sleep(10)
 
-    # create table, While giving column attribute only hash and range column names should be given
+    # create table, While giving column attribute only hash 
+    # and range column names should be given
     print(
         db_value.create_table(
             "test",
@@ -129,7 +135,8 @@ if __name__ == "__main__":
     """
 
     # Reading data based on get item, Get item will read based on key columns only.
-    # Related to alias column name, if any of your table name contains keywords(ie connections) then # should be used bore column name.
+    # Related to alias column name, if any of your table name contains keywords(ie connections)
+    # then # should be used bore column name.
     print(
         db_value.retrive_table_data_using_get(
             table_name="test", filter_condition={"id": {"S": "1"}, "num": {"S": "100"}}
