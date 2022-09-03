@@ -39,7 +39,8 @@ class Dynamodb:
         # Since we are filtering based on
         #  key and hash columns we will get single record.
 
-        response = self.db_client.get_item(TableName=table_name, Key=filter_condition)
+        response = self.db_client.get_item(TableName=table_name, 
+        Key=filter_condition)
         result = response["Item"]
         return result
 
@@ -85,7 +86,8 @@ class Dynamodb:
         return response
 
     def write_to_table(self, table_name, write_value):
-        response = self.db_client.put_item(TableName=table_name, Item=write_value)
+        response = self.db_client.put_item(TableName=table_name,
+         Item=write_value)
         return response
 
 
@@ -98,8 +100,9 @@ if __name__ == "__main__":
     # Wait time to drop the table
     time.sleep(10)
 
-    # create table, While giving column attribute only hash 
-    # and range column names should be given
+    # create table, While giving column attribute
+    #  only hash and range column names 
+    # should be given
     print(
         db_value.create_table(
             "test",
@@ -117,7 +120,8 @@ if __name__ == "__main__":
     # Wait time to create the table
     time.sleep(20)
 
-    # put_item will put only one row, so mutilple row we have to just for loop
+    # put_item will put only one row,
+    #  so mutilple row we have to just for loop
     print(
         db_value.write_to_table(
             table_name="test",
@@ -134,16 +138,19 @@ if __name__ == "__main__":
     )
     """
 
-    # Reading data based on get item, Get item will read based on key columns only.
-    # Related to alias column name, if any of your table name contains keywords(ie connections)
-    # then # should be used bore column name.
+    # Reading data based on get item, Get item will 
+    # read based on key columns only.
+    # Related to alias column name, if any of your table name
+    #  contains keywords(ie connections) then # should be
+    #  used before column name.
     print(
         db_value.retrive_table_data_using_get(
             table_name="test", filter_condition={"id": {"S": "1"}, "num": {"S": "100"}}
         )
     )
 
-    # Reading data based on scan function, Attr function should be used for non primary columns.
+    # Reading data based on scan function, Attr function should be used 
+    # for non primary columns.
     #  For Key columns, we should use Key Function.
     print(
         db_value.retrive_table_data_using_scan(
