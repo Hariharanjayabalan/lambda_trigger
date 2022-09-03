@@ -1,4 +1,3 @@
-from http import client
 import boto3
 import time
 from boto3.dynamodb.conditions import Attr, Key
@@ -16,7 +15,8 @@ class Dynamodb:
         attribute_definition,
         billing_mode="PAY_PER_REQUEST",
     ):
-        # Attributes given in attribute_definition should be an either HASH|RANGE
+        # Attributes given in attribute_definition should be an
+        # either HASH|RANGE
         # HASH---> partition key
         # Range ---> Sort key
         # Combination of HASH and RANGE is primary key
@@ -77,9 +77,11 @@ class Dynamodb:
         response = self.db_client.delete_item(
             TableName=table_name, Key=delete_condition
         )
+        return response
 
     def write_to_table(self, table_name, write_value):
         response = self.db_client.put_item(TableName=table_name, Item=write_value)
+        return response
 
 
 if __name__ == "__main__":
@@ -144,3 +146,4 @@ if __name__ == "__main__":
             alias_columns={"#date1": "date"},
         )
     )
+    time.sleep(1)
