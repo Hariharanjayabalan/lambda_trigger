@@ -33,9 +33,7 @@ class Dynamodb:
         response = self.db_client.delete_table(TableName=table_name)
         return response
 
-    def retrive_table_data_using_get(
-        self, table_name, filter_condition, select_columnns, alias_columns
-    ):
+    def retrive_table_data_using_get(self, table_name, filter_condition):
         # Used to filter only based on key and hash columns(both hash column and key column)
         # Since we are filtering based on key and hash columns we will get single record.
 
@@ -76,7 +74,9 @@ class Dynamodb:
         # If you are not aware of the key columns valu, then use scan function and select the key columns
         # Pass the above selected key columns based for loop
         #
-        response = self.db_client.delete_item(TableName=table_name, Key=delete_condition)
+        response = self.db_client.delete_item(
+            TableName=table_name, Key=delete_condition
+        )
 
     def write_to_table(self, table_name, write_value):
         response = self.db_client.put_item(TableName=table_name, Item=write_value)
@@ -84,6 +84,7 @@ class Dynamodb:
 
 if __name__ == "__main__":
     db_value = Dynamodb()
+    """
     # Delete table
     print(db_value.delete_table("test"))
 
@@ -116,14 +117,20 @@ if __name__ == "__main__":
         )
     )
 
+    # Deleting the data from table
+    # Pass only the key column value
+    print(
+        db_value.delete_table_entry(
+            table_name="test", delete_condition={"id": {"S": "1"}, "num": {"S": "100"}}
+        )
+    )
+    """
+
     # Reading data based on get item, Get item will read based on key columns only.
     # Related to alias column name, if any of your table name contains keywords(ie connections) then # should be used bore column name.
     print(
         db_value.retrive_table_data_using_get(
-            table_name="test",
-            filter_condition={"id": {"S": "1"}, "num": {"S": "100"}},
-            select_columnns="id,num,#date1",
-            alias_columns={"#date1": "date"},
+            table_name="test", filter_condition={"id": {"S": "1"}, "num": {"S": "100"}}
         )
     )
 
@@ -135,13 +142,5 @@ if __name__ == "__main__":
             filter_condition=Attr("date").eq(123) & Key("id").gt(0),
             select_columnns="id,num,#date1",
             alias_columns={"#date1": "date"},
-        )
-    )
-
-    # Deleting the data from table
-    # Pass only the key column value
-    print(
-        db_value.delete_table_entry(
-            table_name="test", delete_condition={"id": {"S": "1"}, "num": {"S": "100"}}
         )
     )
