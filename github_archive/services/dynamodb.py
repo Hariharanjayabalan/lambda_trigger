@@ -161,4 +161,3 @@ if __name__ == "__main__":
             alias_columns={"#date1": "date"},
         )
     )
-    time.sleep(1)

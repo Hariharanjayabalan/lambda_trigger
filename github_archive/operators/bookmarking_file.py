@@ -1,4 +1,3 @@
-from github_archive.services.s3_service import S3
 from github_archive.services.dynamodb import Dynamodb
 from github_archive.conf.github_archive_conf import GithubArchiveConf
 
@@ -11,6 +10,7 @@ def run_db_create():
         attribute_definition=GithubArchiveConf.DYNAMODB_ATTRIBUTE_TYPE,
         billing_mode="PAY_PER_REQUEST",
     )
+    return response
 
 
 def read_latest_file():

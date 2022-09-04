@@ -1,5 +1,4 @@
 from github_archive.services.s3_service import S3
-from github_archive.services.dynamodb import Dynamodb
 from github_archive.conf.github_archive_conf import GithubArchiveConf
 from github_archive.operators.bookmarking_file import run_db_create, read_latest_file
 from github_archive.operators.finding_latest_file import generate_path

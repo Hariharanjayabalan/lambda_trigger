@@ -1,4 +1,3 @@
-import time
 from datetime import datetime, timedelta
 from github_archive.conf.github_archive_conf import GithubArchiveConf
 
