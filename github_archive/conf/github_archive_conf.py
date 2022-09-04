@@ -1,5 +1,5 @@
 class GithubArchiveConf:
-    BUCKET_NAME = "hari-redshift123"
+    BUCKET_NAME = "hari-learn-aws"
     FILE_NAME = "github_archive"
     HOME_PATH = "github/download/"
     SOURCE_URL = "https://data.gharchive.org/"
