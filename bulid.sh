@@ -7,7 +7,7 @@ rm -rf comman_zip
 mkdir lambda_zip
 mkdir comman_zip
 echo "Running Requirement file"
-pip install -r requirements.txt -t comman_zip
+pip install -r requirements_for_bulid.txt -t comman_zip
 echo "Running Zip process"
 zip -rq lambda_zip/github_archive.zip $folder_name
 cd comman_zip
