@@ -11,7 +11,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-def run():
+def run(event, context):
     s3_obj = S3()
     # Calling create table
     try:
@@ -43,4 +43,5 @@ def run():
     # Updating the dynamodb
 
 
-run()
+if __name__ == "__main__":
+    run(None, None)
