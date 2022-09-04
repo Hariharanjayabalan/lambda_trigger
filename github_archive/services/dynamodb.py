@@ -93,6 +93,45 @@ class Dynamodb:
 
 if __name__ == "__main__":
     db_value = Dynamodb()
+    """
+    # Delete table
+    print(db_value.delete_table("test"))
+    # Wait time to drop the table
+    time.sleep(10)
+    # create table, While giving column attribute
+    #  only hash and range column names 
+    # should be given
+    print(
+        db_value.create_table(
+            "test",
+            [
+                {"AttributeName": "id", "KeyType": "HASH"},
+                {"AttributeName": "num", "KeyType": "RANGE"},
+            ],
+            [
+                {"AttributeName": "id", "AttributeType": "S"},
+                {"AttributeName": "num", "AttributeType": "S"},
+            ],
+        )
+    )
+    # Wait time to create the table
+    time.sleep(20)
+    # put_item will put only one row,
+    #  so mutilple row we have to just for loop
+    print(
+        db_value.write_to_table(
+            table_name="test",
+            write_value={"id": {"S": "1"}, "num": {"S": "100"}, "date": {"N": "123"}},
+        )
+    )
+    # Deleting the data from table
+    # Pass only the key column value
+    print(
+        db_value.delete_table_entry(
+            table_name="test", delete_condition={"id": {"S": "1"}, "num": {"S": "100"}}
+        )
+    )
+    """
     # Reading data based on get item, Get item will
     # read based on key columns only.
     # Related to alias column name, if any of your table name
