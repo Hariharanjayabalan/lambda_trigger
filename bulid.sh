@@ -9,7 +9,7 @@ mkdir comman_zip
 echo "Running Requirement file"
 pip install -r requirements.txt -t comman_zip
 echo "Running Zip process"
-zip -rq lambda_zip/upload.zip $folder_name
+zip -rq lambda_zip/github_archive.zip $folder_name
 cd comman_zip
-zip -rq ../lambda_zip/upload.zip .
+zip -rq ../lambda_zip/github_archive.zip .
 rm -rf ../comman_zip

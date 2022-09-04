@@ -40,7 +40,10 @@ class Dynamodb:
         #  key and hash columns we will get single record.
 
         response = self.db_client.get_item(TableName=table_name, Key=filter_condition)
-        result = response["Item"]
+        if "Item" in response:
+            result = response["Item"]
+        else:
+            result = ""
         return result
 
     def retrive_table_data_using_scan(

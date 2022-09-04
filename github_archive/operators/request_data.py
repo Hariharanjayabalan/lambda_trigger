@@ -12,4 +12,5 @@ def read_data(path):
         sys.exit(1)
 
 
-read_data("https://data.gharchive.org/2015-01-01-15.json.gz")
+if __name__ == "__main__":
+    read_data("https://data.gharchive.org/2015-01-01-15.json.gz")
