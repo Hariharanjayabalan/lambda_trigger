@@ -8,12 +8,14 @@ class GithubArchiveConf:
     SOURCE_URL = "https://data.gharchive.org/"
     INITIAL_LOAD_START_DT = "2015-09-01"
     DYNAMODB_TABLE_NAME = "gharchive"
+    '''
     DYNAMODB_PARAM = {
         "TABLE_ID": {"N": "HASH"},
         "FILE_NAME": {"S": "HASH"},
         "FILE_CYLE_DT": {"N": "RANGE"},
         "LAST_MODIFIED_DATE": {"N": "RANGE"},
     }
+    '''
     DYNAMODB_KEY_TYPE = [
         {"AttributeName": "TABLE_ID", "KeyType": "HASH"},
         {"AttributeName": "FILE_NAME", "KeyType": "RANGE"},

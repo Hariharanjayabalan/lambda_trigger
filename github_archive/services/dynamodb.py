@@ -1,5 +1,4 @@
 import boto3
-import time
 from boto3.dynamodb.conditions import Attr, Key
 
 
@@ -117,7 +116,6 @@ if __name__ == "__main__":
             ],
         )
     )
-
     # Wait time to create the table
     time.sleep(20)
 
@@ -138,7 +136,6 @@ if __name__ == "__main__":
         )
     )
     """
-
     # Reading data based on get item, Get item will
     # read based on key columns only.
     # Related to alias column name, if any of your table name
@@ -149,7 +146,6 @@ if __name__ == "__main__":
             table_name="test", filter_condition={"id": {"S": "1"}, "num": {"S": "100"}}
         )
     )
-
     # Reading data based on scan function, Attr function should be used
     # for non primary columns.
     #  For Key columns, we should use Key Function.
