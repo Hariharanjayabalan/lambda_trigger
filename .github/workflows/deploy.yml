@@ -45,9 +45,8 @@ jobs:
       steps:
       - uses: actions/checkout@v3
       - name: Dev Bulid code
-
         run: |
-        sh +x bulid.sh
+          sh +x bulid.sh
 
   deploy-prod:
 
@@ -56,11 +55,9 @@ jobs:
       needs: [ build,deploy-dev]
       steps:
       - uses: actions/checkout@v3
-      
       - name: Prod Bulid code
-
         run: |
-        sh +x bulid.sh
+          sh +x bulid.sh
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
