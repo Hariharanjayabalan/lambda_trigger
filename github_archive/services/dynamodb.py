@@ -131,7 +131,7 @@ if __name__ == "__main__":
     """
 
     # Reading data based on get item, Get item will read based on key columns only.
-    # Related to alias column name, if any of your table name 
+    # Related to alias column name, if any of your table name
     # contains keywords(ie connections) then # should be used bore column name.
     print(
         db_value.retrive_table_data_using_get(
@@ -139,7 +139,7 @@ if __name__ == "__main__":
         )
     )
 
-    # Reading data based on scan function, Attr function 
+    # Reading data based on scan function, Attr function
     # should be used for non primary columns.
     #  For Key columns, we should use Key Function.
     print(
