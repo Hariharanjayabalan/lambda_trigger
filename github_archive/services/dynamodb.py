@@ -27,7 +27,7 @@ class Dynamodb:
             KeySchema=key_schema,
             BillingMode=billing_mode,
         )
-        print(response)
+        return response
 
     def delete_table(self, table_name):
         response = self.db_client.delete_table(TableName=table_name)
