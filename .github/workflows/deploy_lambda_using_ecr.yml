@@ -56,12 +56,6 @@ jobs:
       needs: [ build,deploy-dev]
       steps:
       - uses: actions/checkout@v3
-      - name: Prod Bulid ECR image
-        run: |
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 687988828279.dkr.ecr.us-east-1.amazonaws.com
-          docker build -t gharchive .
-          docker tag gharchive:latest 687988828279.dkr.ecr.us-east-1.amazonaws.com/gharchive:latest
-          docker push 687988828279.dkr.ecr.us-east-1.amazonaws.com/gharchive:latest
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -69,9 +63,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-          role-session-name: lambda_profile
+      
+      - name: Prod Bulid ECR image
+        run: |
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 687988828279.dkr.ecr.us-east-1.amazonaws.com
+          docker build -t gharchive .
+          docker tag gharchive:latest 687988828279.dkr.ecr.us-east-1.amazonaws.com/gharchive:latest
+          docker push 687988828279.dkr.ecr.us-east-1.amazonaws.com/gharchive:latest
 
-          
       - name: Delete the existing files in S3
         run: |
           aws s3 rm s3://hari-learn-aws/github/download/ --recursive
