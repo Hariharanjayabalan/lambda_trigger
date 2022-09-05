@@ -3,7 +3,7 @@ import time
 
 
 class GithubArchiveConf:
-    BUCKET_NAME = "hari-learn-aws"
+    BUCKET_NAME = "hari-learn"
     FILE_NAME = "github_archive"
     HOME_PATH = "github/download/"
     SOURCE_URL = "https://data.gharchive.org/"
