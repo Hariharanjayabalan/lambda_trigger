@@ -32,9 +32,7 @@ class GithubArchiveConf:
 
     DYNAMODB_WRITE_CONDITION = {
         "TABLE_ID": {"N": "1"},
-        "FILE_NAME": {"S": "gharchive"},
-        "FILE_CYLE_DT": {"N": "123"},
-        "LAST_MODIFIED_DATE": {"N": "1234"},
+        "FILE_NAME": {"S": "gharchive"}
     }
 
     @staticmethod
