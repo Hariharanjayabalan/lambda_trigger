@@ -30,10 +30,7 @@ class GithubArchiveConf:
         "FILE_NAME": {"S": "gharchive"},
     }
 
-    DYNAMODB_WRITE_CONDITION = {
-        "TABLE_ID": {"N": "1"},
-        "FILE_NAME": {"S": "gharchive"}
-    }
+    DYNAMODB_WRITE_CONDITION = {"TABLE_ID": {"N": "1"}, "FILE_NAME": {"S": "gharchive"}}
 
     @staticmethod
     def epoch_time():
