@@ -4,8 +4,10 @@ from boto3.dynamodb.conditions import Attr, Key
 
 class Dynamodb:
     def __init__(self) -> None:
-        self.db_client = boto3.client("dynamodb", verify=False)
-        self.db_resource = boto3.resource("dynamodb", verify=False)
+        self.db_client = boto3.client("dynamodb", region_name="us-east-1", verify=False)
+        self.db_resource = boto3.resource(
+            "dynamodb", region_name="us-east-1", verify=False
+        )
 
     def create_table(
         self,

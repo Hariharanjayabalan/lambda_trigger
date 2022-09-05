@@ -22,8 +22,12 @@ def read_latest_file():
     return response
 
 
-def update_latest_file(filter_condition=GithubArchiveConf.DYNAMODB_WRITE_CONDITION):
+def update_latest_file(FILE_CYLE_DT):
     db_set = Dynamodb()
+    filter_condition = GithubArchiveConf.DYNAMODB_WRITE_CONDITION
+    filter_condition["FILE_CYLE_DT"] = {"S": FILE_CYLE_DT}
+    filter_condition["LAST_MODIFIED_DATE"] = {"N": str(GithubArchiveConf.epoch_time())}
+    print(f"Updating the Dynamodb value to {filter_condition}")
     response = db_set.write_to_table(
         table_name=GithubArchiveConf.DYNAMODB_TABLE_NAME, write_value=filter_condition
     )
@@ -31,4 +35,4 @@ def update_latest_file(filter_condition=GithubArchiveConf.DYNAMODB_WRITE_CONDITI
 
 
 if __name__ == "__main__":
-    print(read_latest_file())
+    print(update_latest_file())

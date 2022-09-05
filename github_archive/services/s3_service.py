@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore")
 
 class S3:
     def __init__(self):
-        self.s3_client = boto3.client("s3", verify=False)
+        self.s3_client = boto3.client("s3", region_name="us-east-1", verify=False)
 
     def s3_list_buckets(self):
         bucket = self.s3_client.list_buckets()

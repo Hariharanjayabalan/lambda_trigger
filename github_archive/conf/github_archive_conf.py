@@ -1,9 +1,13 @@
+from datetime import datetime
+import time
+
+
 class GithubArchiveConf:
     BUCKET_NAME = "hari-learn-aws"
     FILE_NAME = "github_archive"
     HOME_PATH = "github/download/"
     SOURCE_URL = "https://data.gharchive.org/"
-    INITIAL_LOAD_START_DT = "2015-09-01"
+    INITIAL_LOAD_START_DT = "2015-09-01-01"
     DYNAMODB_TABLE_NAME = "gharchive"
     DYNAMODB_PARAM = {
         "TABLE_ID": {"N": "HASH"},
@@ -32,3 +36,9 @@ class GithubArchiveConf:
         "FILE_CYLE_DT": {"N": "123"},
         "LAST_MODIFIED_DATE": {"N": "1234"},
     }
+
+    @staticmethod
+    def epoch_time():
+        pattern = "%Y-%m-%d %H:%M:%S"
+        ts = datetime.strftime(datetime.now(), pattern)
+        return int(time.mktime(time.strptime(ts, pattern)))

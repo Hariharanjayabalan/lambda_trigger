@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Bulid serverless
+name: Bulid serverless using ECR
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
     
 env:
-  AWS_REGION: ca-central-1                   # set this to your preferred AWS region, e.g. us-west-1
+  AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
 
 permissions:
   contents: read
@@ -44,9 +44,10 @@ jobs:
       needs: build
       steps:
       - uses: actions/checkout@v3
-      - name: Dev Bulid code
+      - name: Creating the ECR Image
         run: |
-          sh +x bulid.sh
+        echo 'work is pending'
+          
 
   deploy-prod:
 
@@ -55,9 +56,12 @@ jobs:
       needs: [ build,deploy-dev]
       steps:
       - uses: actions/checkout@v3
-      - name: Prod Bulid code
+      - name: Prod Bulid ECR image
         run: |
-          sh +x bulid.sh
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 687988828279.dkr.ecr.us-east-1.amazonaws.com
+          docker build -t gharchive .
+          docker tag gharchive:latest 687988828279.dkr.ecr.us-east-1.amazonaws.com/gharchive:latest
+          docker push 687988828279.dkr.ecr.us-east-1.amazonaws.com/gharchive:latest
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -67,22 +71,15 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: lambda_profile
 
-      - name: Copy the Zip file to AWS S3
-        run: |
-          echo `pwd`
-          echo `ls`
-          echo `ls build_code`
-          aws s3 cp lambda_zip/github_archive.zip s3://hari-learn-aws/code/lambda/zip/
           
       - name: Delete the existing files in S3
         run: |
           aws s3 rm s3://hari-learn-aws/github/download/ --recursive
           
       
-      - name: Deploy to AWS Lambda
+      - name: Udpdating the image to AWS Lambda
         run: |
           aws lambda update-function-code \
-                --function-name  github_archive \
-                --s3-bucket hari-learn-aws \
-                --s3-key code/lambda/zip/github_archive.zip
+                --function-name  github_archive_using_ecr \
+                --image-uri 687988828279.dkr.ecr.us-east-1.amazonaws.com/gharchive:latest
       
