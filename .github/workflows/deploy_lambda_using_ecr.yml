@@ -73,7 +73,7 @@ jobs:
 
       - name: Delete the existing files in S3
         run: |
-          aws s3 rm s3://hari-learn-aws/github/download/ --recursive
+          aws s3 rm s3://hari-learn/github/download/ --recursive
           
       
       - name: Udpdating the image to AWS Lambda
